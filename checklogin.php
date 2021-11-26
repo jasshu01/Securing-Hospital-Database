@@ -2,7 +2,7 @@
 function check_login()
 {
 
- echo $_SESSION['login'];
+ //echo $_SESSION['login'];
 if(strlen($_SESSION['login'])==0)
 	{	
 		$host = $_SERVER['HTTP_HOST'];
