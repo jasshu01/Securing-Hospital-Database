@@ -20,7 +20,12 @@
 <div class="container mt-3">
     <?php
 
-
+session_start();
+//error_reporting(0);
+include('config.php');
+include('checklogin.php');
+check_login();
+   
 // id , specilization, doctorName, address, docFees, contactno, docEmail 
 
 if(isset($_POST['submit'])){

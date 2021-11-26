@@ -25,22 +25,90 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }else {
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
-        // echo "SELECT id FROM admin WHERE Username = '$username' and Password = '';Drop table users;#';";
         $result = $stmt->get_result();
         $row = mysqli_fetch_array($result);
         //$active = $row['active'];
         $count = mysqli_num_rows($result);
         // If result matched $myusername and $mypassword, table row must be 1 row
-        if($count == 1) {
-        $_SESSION["myusername"]=$username;
-        $_SESSION['login_user'] = $username;
-        header("location: welcome.php");
-        }else {
-        $error = "Your Login Name or Password is invalid<br><br>";
-        echo $error;
-        }
+
+
+        // if($count == 1) {
+
+        //     echo "$username";
+
+        //     // $_SESSION['login']=$username;
+        //     $_SESSION['login']="loggedin";
+            
+        //     // $host=$_SERVER['HTTP_HOST'];
+        //     // $uip=$_SERVER['REMOTE_ADDR'];
+        //     // $status=1;
+        //     // $extra="welcome.php";//
+        //     // $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+        //     // header("location:http://$host$uri/$extra");
+        //     // exit();
+
+
+
+        // // $_SESSION["myusername"]=$username;
+        // // $_SESSION['login_user'] = $username;
+
+
+        // header("location: doctoradd.php");
+        // // header("location: welcome.php");
+
+
+
+        // }else {
+        // $error = "Your Login Name or Password is invalid<br><br>";
+        // echo $error;
+        // }
+// ------------------------------------------------
+if($count == 1) 
+    {
+    $extra="welcome.php";//
+
+    session_start();
+
+
+    $_SESSION['login']="loggedin";
+    $_SESSION['id']=$row['id'];
+    // print_r($_SESSION);
+    // echo "Session variables are set.";
+    $host=$_SERVER['HTTP_HOST'];
+    $uip=$_SERVER['REMOTE_ADDR'];
+    $status=1;
+    $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+    header("location:http://$host$uri/$extra");
+    exit();
+    }
+    else
+    {
+
+        echo "invalid";
+        // For stroing log if user login unsuccessfull
+    $_SESSION['login']="";
+
+    $uip=$_SERVER['REMOTE_ADDR'];
+    $status=0;
+
+    $_SESSION['errmsg']="Invalid username or password";
+    $extra="admin.html";
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+    header("location:http://$host$uri/$extra");
+    exit();
+    }
+// ------------------------------------------------
+
+
+
+
+
+
     }
 
+
+    
     
 }
 mysqli_close($conn);

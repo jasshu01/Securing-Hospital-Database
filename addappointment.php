@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+//error_reporting(0);
+include('config.php');
+include('checklogin.php');
+check_login();
+
+?>
+
 <html>
 
 <head>
