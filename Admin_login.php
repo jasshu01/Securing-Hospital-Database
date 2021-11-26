@@ -84,19 +84,20 @@ if($count == 1)
     else
     {
 
-        echo "invalid";
+
+        echo "Invalid username or password";
         // For stroing log if user login unsuccessfull
-    $_SESSION['login']="";
+    // $_SESSION['login']="";
 
-    $uip=$_SERVER['REMOTE_ADDR'];
-    $status=0;
+    // $uip=$_SERVER['REMOTE_ADDR'];
+    // $status=0;
 
-    $_SESSION['errmsg']="Invalid username or password";
-    $extra="admin.html";
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-    header("location:http://$host$uri/$extra");
-    exit();
+    // $_SESSION['errmsg']="Invalid username or password";
+    // $extra="admin.html";
+    // $host  = $_SERVER['HTTP_HOST'];
+    // $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+    // header("location:http://$host$uri/$extra");
+    // exit();
     }
 // ------------------------------------------------
 
