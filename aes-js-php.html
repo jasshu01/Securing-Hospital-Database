@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>AES JavaScript+PHP test harness (client-side encrypt)</title>
+
+</head>
+<body>
+<!-- encrypt the message before submitting the form -->
+<form name="frm" id="frm" method="post" action="./aes-js-php.php">
+  <p>Message: <input type="text" name="message" id="message" size="40" value=""></p>
+  <p><input type="submit" value="Encrypt it:"></p>
+</form>
+<script type="module">
+  import AesCtr from './aes-ctr.js'
+  var form = document.getElementById("frm");
+  function handleForm(event) { 
+    var form = document.getElementById("frm");
+    var enc = AesCtr.encrypt(form.message.value, 'L0ck it up saf3', 256) 
+    form.message.value = enc;
+  } 
+  form.addEventListener('submit', handleForm);
+</script>
+</body>
+</html>
