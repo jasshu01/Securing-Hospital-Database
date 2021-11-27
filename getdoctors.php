@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
-
 <html>
 
 <head>
@@ -37,13 +27,11 @@ check_login();
 
 // Get a connection for the database
 require_once('./mysqli_connect.php');
-// require_once('./admin_login.php ');
 
-// Create a query for the database
+
 $query = "SELECT id , specilization, doctorName, address, docFees, contactno, docEmail  FROM doctors";
 
-// Get a response from the database by sending the connection
-// and the query
+
 $response = @mysqli_query($dbc, $query);
 
 // If the query executed properly proceed
@@ -74,13 +62,13 @@ cellspacing="5" cellpadding="8">
 while($row = mysqli_fetch_array($response)){
 
 echo '<tr><td align="left">' . 
-htmlspecialchars($row['id']) . '</td><td align="left">' . 
-htmlspecialchars($row['specilization']) . '</td><td align="left">' .
-htmlspecialchars($row['doctorName']) . '</td><td align="left">' . 
-htmlspecialchars($row['address']) . '</td><td align="left">' .
-htmlspecialchars($row['docFees']) . '</td><td align="left">' . 
-htmlspecialchars($row['contactno']) . '</td><td align="left">' .
-htmlspecialchars($row['docEmail']) . '</td><td align="left">' ; 
+$row['id'] . '</td><td align="left">' . 
+$row['specilization'] . '</td><td align="left">' .
+$row['doctorName'] . '</td><td align="left">' . 
+$row['address'] . '</td><td align="left">' .
+$row['docFees'] . '</td><td align="left">' . 
+$row['contactno'] . '</td><td align="left">' .
+$row['docEmail'] . '</td><td align="left">' ; 
 
 
 echo '</tr>';

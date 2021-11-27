@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
-
 <html>
 
 <head>
@@ -45,7 +35,6 @@ if(isset($_POST['submit'])){
     } else {
         // Trim white space from the name and store the name
         $id = trim($_POST['id']);
-        $id = htmlspecialchars($id);
 
     }
     if(empty($_POST['pat_id'])){
@@ -56,7 +45,7 @@ if(isset($_POST['submit'])){
   } else {
       // Trim white space from the name and store the name
       $pat_id = trim($_POST['pat_id']);
-      $pat_id = htmlspecialchars($pat_id);
+
   }
 
     if(empty($_POST['doctorSpecialization'])){
@@ -68,7 +57,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $doctorSpecialization = trim($_POST['doctorSpecialization']);
-        $doctorSpecialization = htmlspecialchars($doctorSpecialization);
+
     }
     
     if(empty($_POST['doctorId'])){
@@ -80,7 +69,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $doctorId = trim($_POST['doctorId']);
-        $doctorId = htmlspecialchars($doctorId);
+
     }
 
    
@@ -93,7 +82,7 @@ if(isset($_POST['submit'])){
 
     // Trim white space from the name and store the name
     $consultancyFees = trim($_POST['consultancyFees']);
-    $consultancyFees = htmlspecialchars($consultancyFees);
+
 }
 if(empty($_POST['appointmentDate'])){
 
@@ -104,7 +93,7 @@ if(empty($_POST['appointmentDate'])){
 
   // Trim white space from the name and store the name
   $appointmentDate = trim($_POST['appointmentDate']);
-  $appointmentDate = htmlspecialchars($appointmentDate);
+
 }
 
     if(empty($_POST['appointmentTime'])){
@@ -116,7 +105,7 @@ if(empty($_POST['appointmentDate'])){
 
         // Trim white space from the name and store the name
         $appointmentTime = trim($_POST['appointmentTime']);
-        $appointmentTime = htmlspecialchars($appointmentTime);
+
     }
 
     if(empty($_POST['postingDate'])){
@@ -128,93 +117,46 @@ if(empty($_POST['appointmentDate'])){
 
         // Trim white space from the name and store the name
         $postingDate = trim($_POST['postingDate']);
-        $postingDate = htmlspecialchars($postingDate);
+
     }
 
     if(empty($data_missing)){
-        
-        $servername = "localhost";
+ 
+
+
+
+        $server = "localhost";
         $username = "root";
         $password = "";
-        $database = "hms";
-        // Create connection
-        $conn = mysqli_connect($servername, $username, $password,$database);
-        // Check connection
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
+    
+        // Create a database connection
+        $con = mysqli_connect($server, $username, $password,"hms");
+    
+        // Check for connection success
+        if(!$con){
+            die("connection to this database failed due to" . mysqli_connect_error());
         }
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $query = "INSERT INTO appointment VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt, $query)){
-                echo "SQL statement failed";
-            } else{
-                mysqli_stmt_bind_param($stmt, "issiisss", $id, $pat_id, $doctorSpecialization, $doctorId, $consultancyFees, $appointmentDate, $appointmentTime,$postingDate);
-                mysqli_stmt_execute($stmt);
-            
-                $affected_rows = mysqli_stmt_affected_rows($stmt);
-            
-                if($affected_rows == 1){
-                    
-                    echo 'Appointment made';
-                    
-                    mysqli_stmt_close($stmt);
-                    
-                    mysqli_close($conn);
-                    
-                } else {
-                    
-                    echo 'Error Occurred<br />';
-                    echo mysqli_error($conn);
-                    
-                    mysqli_stmt_close($stmt);
-                    
-                    mysqli_close($conn);
-                    
-                }
-            }
-        }
-        
-        // $server = "localhost";
-        // $username = "root";
-        // $password = "";
+        // echo "Success connecting to the db";
     
-        // // Create a database connection
-        // $con = mysqli_connect($server, $username, $password,"hms");
-    
-        // // Check for connection success
-        // if(!$con){
-        //     die("connection to this database failed due to" . mysqli_connect_error());
-        // }
-        // // echo "Success connecting to the db";
-    
-        // // Collect post variables
-        // // $sql = "INSERT INTO 'hms'.'doctors' ('id' , 'doctorSpecialization', 'doctorName', 'address', 'docFees', 'contactno', 'docEmail') VALUES ('$id', '$doctorSpecialization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
-        // $sql = "INSERT INTO appointment VALUES (?,?,?,?,?,?,?)";
-        // $stmt = mysqli_stmt_init($conn);
-        // if (mysqli_stmt_prepare($stmt, $con)){
-        //     echo "SQL statement failed";
-        // } else {
-        //     mysqli_stmt_bind_param($stmt, "sssssss", $id, $pat_id, $doctorSpecialization, $doctorId, $consultancyFees, $appointmentDate, $postingDate);
-        //     mysqli_stmt_execute($stmt);
+        // Collect post variables
+        // $sql = "INSERT INTO 'hms'.'doctors' ('id' , 'doctorSpecialization', 'doctorName', 'address', 'docFees', 'contactno', 'docEmail') VALUES ('$id', '$doctorSpecialization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
+        $sql = "INSERT INTO appointment VALUES ('$id' ,'$pat_id', '$doctorSpecialization','$doctorId','$consultancyFees','$appointmentDate','$appointmentTime','$postingDate')";
 
-        // }
-        // // echo $sql;
+        // echo $sql;
     
-        // // Execute the query
-        // if($con->query($sql) == true){
-        //     echo "Successfully inserted";
+        // Execute the query
+        if($con->query($sql) == true){
+            echo "Successfully inserted";
     
-        //     // Flag for successful insertion
-        //     $insert = true;
-        // }
-        // else{
-        //     echo "ERROR: $sql <br> $con->error";
-        // }
+            // Flag for successful insertion
+            $insert = true;
+        }
+        else{
+            echo "ERROR: $sql <br> $con->error";
+        }
     
-        // // Close the database connection
-        // $con->close();
+        // Close the database connection
+        $con->close();
 
 
     } else {

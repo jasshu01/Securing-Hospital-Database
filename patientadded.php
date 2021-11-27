@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
-
 <html>
 
 <head>
@@ -43,7 +33,6 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $doc_id = trim($_POST['Docid']);
-        $doc_id = htmlspecialchars($doc_id);
 
     }
 
@@ -56,7 +45,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_name = trim($_POST['PatientName']);
-        $patient_name = htmlspecialchars($patient_name);
+
     }
 
     if(empty($_POST['PatientContno'])){
@@ -68,7 +57,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_cont_no = trim($_POST['PatientContno']);
-        $patient_cont_no = htmlspecialchars($patient_cont_no);
+
     }
 
     if(empty($_POST['PatientEmail'])){
@@ -80,7 +69,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_email = trim($_POST['PatientEmail']);
-        $patient_email = htmlspecialchars($patient_email);
+
     }
 
     if(empty($_POST['PatientGender'])){
@@ -92,7 +81,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_gender = trim($_POST['PatientGender']);
-        $patient_gender = htmlspecialchars($patient_gender);
+
     }
 
     if(empty($_POST['PatientAdd'])){
@@ -104,7 +93,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_add = trim($_POST['PatientAdd']);
-        $patient_add = htmlspecialchars($patient_add);
+
     }
 
     if(empty($_POST['PatientMedhis'])){
@@ -116,7 +105,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_med_his = trim($_POST['PatientMedhis']);
-        $patient_med_his = htmlspecialchars($patient_med_his);
+
     }
 
     if(empty($_POST['PatientAge'])){
@@ -128,7 +117,7 @@ if(isset($_POST['submit'])){
 
         // Trim white space from the name and store the name
         $patient_age = trim($_POST['PatientAge']);
-        $patient_age = htmlspecialchars($patient_age);
+
     }
 
 

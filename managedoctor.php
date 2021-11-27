@@ -1,21 +1,11 @@
-<?php
+ <?php
 
 session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
 
-?>
-
-<?php
-
-// session_start();
-
-// if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
-// {
-//     header("location: login.php");
-// }
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+{
+    header("location: login.php");
+}
 
 
 ?> 

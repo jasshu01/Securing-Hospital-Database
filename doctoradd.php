@@ -17,15 +17,10 @@
 
 
 <body>
-<div class="container mt-3">
-    <?php
+    <div class="container mt-3">
+        <?php
 
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-   
+
 // id , specilization, doctorName, address, docFees, contactno, docEmail 
 
 if(isset($_POST['submit'])){
@@ -34,90 +29,90 @@ if(isset($_POST['submit'])){
     
     if(empty($_POST['id'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor ID';
 
     } else {
-        // Trim white space from the name and store the name
+        
         $id = trim($_POST['id']);
-        $id = htmlspecialchars($id);
+
     }
 
     if(empty($_POST['specilization'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Specilization';
 
     } else{
 
-        // Trim white space from the name and store the name
+        
         $specilization = trim($_POST['specilization']);
-        $specilization = htmlspecialchars($specilization);
+
     }
 
 
     
     if(empty($_POST['doctorName'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor Name';
 
     } else{
 
-        // Trim white space from the name and store the name
+        
         $doctorName = trim($_POST['doctorName']);
-        $doctorName = htmlspecialchars($doctorName);
+
     }
 
 
     if(empty($_POST['contactno'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor Contact Number';
 
     } else {
 
-        // Trim white space from the name and store the name
+        
         $contactno = trim($_POST['contactno']);
-        $contactno = htmlspecialchars($contactno);
+
     }
 
     if(empty($_POST['docEmail'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor Email';
 
     } else {
 
-        // Trim white space from the name and store the name
+        
         $docEmail = trim($_POST['docEmail']);
-        $docEmail = htmlspecialchars($docEmail);
+
     }
 
    if(empty($_POST['docFees'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor Fees';
 
     } else {
 
-        // Trim white space from the name and store the name
+        
         $docFees = trim($_POST['docFees']);
-        $docFees = htmlspecialchars($docFees);
+
     }
 
   
 
     if(empty($_POST['address'])){
 
-        // Adds name to array
+       
         $data_missing[] = 'Doctor Address';
 
     } else {
 
-        // Trim white space from the name and store the name
+        
         $address = trim($_POST['address']);
-        $address = htmlspecialchars($address);
+
     }
 
 
@@ -125,72 +120,37 @@ if(isset($_POST['submit'])){
 
     if(empty($data_missing)){
  
- 
-        require_once('./mysqli_connect.php');
-        $query = "INSERT INTO doctors VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_stmt_init($dbc);
-        if (!mysqli_stmt_prepare($stmt, $query)){
-            echo "SQL statement failed";
-        } else {
-            mysqli_stmt_bind_param($stmt, "sssssss", $id, $specilization, $doctorName, $address, $docFees, $contactno, $docEmail);
-            mysqli_stmt_execute($stmt);
-            
-            $affected_rows = mysqli_stmt_affected_rows($stmt);
-            
-            if($affected_rows == 1){
-                
-                echo 'Doctor Entered';
-                
-                mysqli_stmt_close($stmt);
-                
-                mysqli_close($dbc);
-                
-            } else {
-                
-                echo 'Error Occurred<br />';
-                echo mysqli_error($dbc);
-                
-                mysqli_stmt_close($stmt);
-                
-                mysqli_close($dbc);
-                
-            }
-        }
+        $server = "localhost";
+        $username = "root";
+        $password = "";
+    
         
+        $con = mysqli_connect($server, $username, $password,"hms");
+    
+        
+        if(!$con){
+            die("connection to this database failed due to" . mysqli_connect_error());
+        }
+        // echo "Success connecting to the db";
+    
+     
+        // $sql = "INSERT INTO 'hms'.'doctors' ('id' , 'specilization', 'doctorName', 'address', 'docFees', 'contactno', 'docEmail') VALUES ('$id', '$specilization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
+        $sql = "INSERT INTO doctors VALUES ('$id', '$specilization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
 
-
-        // $server = "localhost";
-        // $username = "root";
-        // $password = "";
+        // echo $sql;
     
-        // // Create a database connection
-        // $con = mysqli_connect($server, $username, $password,"hms");
+        // Execute the query
+        if($con->query($sql) == true){
+            echo "Successfully inserted";
     
-        // // Check for connection success
-        // if(!$con){
-        //     die("connection to this database failed due to" . mysqli_connect_error());
-        // }
-        // // echo "Success connecting to the db";
+            $insert = true;
+        }
+        else{
+            echo "ERROR: $sql <br> $con->error";
+        }
     
-        // // Collect post variables
-        // // $sql = "INSERT INTO 'hms'.'doctors' ('id' , 'specilization', 'doctorName', 'address', 'docFees', 'contactno', 'docEmail') VALUES ('$id', '$specilization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
-        // $sql = "INSERT INTO doctors VALUES ('$id', '$specilization', '$doctorName', '$address', '$docFees', '$contactno', '$docEmail')";
-
-        // // echo $sql;
-    
-        // // Execute the query
-        // if($con->query($sql) == true){
-        //     echo "Successfully inserted";
-    
-        //     // Flag for successful insertion
-        //     $insert = true;
-        // }
-        // else{
-        //     echo "ERROR: $sql <br> $con->error";
-        // }
-    
-        // // Close the database connection
-        // $con->close();
+       
+        $con->close();
 
 
     } else {
@@ -210,15 +170,16 @@ if(isset($_POST['submit'])){
 ?>
 
 
-    <!-- id , specilization, doctorName, address, docFees, contactno, docEmail -->
+        <!-- id , specilization, doctorName, address, docFees, contactno, docEmail -->
 
-    
+
         <h1>Add Doctor</h1>
         <form action="/isaa/doctoradd.php" method="post">
 
             <div class="form-group">
                 <!-- <label for="id">Assign Doctor ID</label> -->
-                <input type="text" class="form-control" id="id" name="id" aria-describedby="id" placeholder="Enter Doctor ID">
+                <input type="text" class="form-control" id="id" name="id" aria-describedby="id"
+                    placeholder="Enter Doctor ID">
             </div>
             <div class="form-group">
                 <!-- <label for="doctorName">Doctor Name</label> -->
@@ -227,8 +188,8 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
                 <!-- <label for="specilization">Doctor Specialization</label> -->
-                <input type="text" class="form-control" id="specilization" name="specilization" aria-describedby="specilization"
-                    placeholder="Enter Doctor Specilization">
+                <input type="text" class="form-control" id="specilization" name="specilization"
+                    aria-describedby="specilization" placeholder="Enter Doctor Specilization">
             </div>
             <div class="form-group">
                 <!-- <label for="address">Doctor Address</label> -->
@@ -254,18 +215,18 @@ if(isset($_POST['submit'])){
             <button name="submit" value="Send" type="submit" class="btn btn-primary">Add Doctor</button>
         </form>
 
-      <div class="row">
-      <form action="getdoctors.php">
-        <button class="btn btn-primary mx-2">See Doctors List</button>
-        </form>
-        <form action="welcome.php">
-        <button class="btn btn-primary" >Go to home page</button>
-        </form>
-      </div>
+        <div class="row">
+            <form action="getdoctors.php">
+                <button class="btn btn-primary mx-2">See Doctors List</button>
+            </form>
+            <form action="welcome.php">
+                <button class="btn btn-primary">Go to home page</button>
+            </form>
+        </div>
     </div>
 
 
-    
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

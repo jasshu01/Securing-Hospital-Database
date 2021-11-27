@@ -1,23 +1,3 @@
-
-<?php
-
-session_start();
-// echo $_SESSION["login"];
-// echo strlen($_SESSION["login"]);
-// print_r($_SESSION);
-
-
-// session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -124,8 +104,7 @@ check_login();
                     </ul>
                 </div>
                 <div>
-                    <form action="logout.php"> <button class="btn btn-danger">Log Out</button></form>
-                    <!-- <form action="/admin.html"> <button class="btn btn-danger">Log Out</button></form> -->
+                    <form action="admin.html"> <button class="btn btn-danger">Log Out</button></form>
                    
                 </div>
             </div>
@@ -145,7 +124,7 @@ check_login();
                     <div class="card-body">
                         <h5 class="card-title">Appointment</h5>
                         <p class="card-text">To get an appointment, Register here with appropiate details</p>
-                        <a href="/isaa/protected/appointments.php" class="btn btn-primary">Register Here</a>
+                        <a href="/isaa/appointments.php" class="btn btn-primary">Register Here</a>
                     </div>
                 </div>
             </div>
@@ -156,7 +135,7 @@ check_login();
                         <p class="card-text">Manages the Patients informations, Add or display patients registered in
                             the hospital
                         </p>
-                        <a href="/isaa/protected/getpatient.php" class="btn btn-primary">Enter Here</a>
+                        <a href="/isaa/getpatient.php" class="btn btn-primary">Enter Here</a>
                     </div>
                 </div>
             </div>
@@ -166,7 +145,7 @@ check_login();
                         <h5 class="card-title">Manage Doctors</h5>
                         <p class="card-text">Hospital's prestiged Doctor informations and availability can be found here
                         </p>
-                        <a href="/isaa/protected/getdoctors.php" class="btn btn-primary">Enter Here</a>
+                        <a href="/isaa/getdoctors.php" class="btn btn-primary">Enter Here</a>
                     </div>
                 </div>
             </div>

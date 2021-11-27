@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
-
 <html>
 
 <head>
@@ -64,15 +54,15 @@ cellspacing="5" cellpadding="8">
 while($row = mysqli_fetch_array($response)){
 
 echo '<tr><td align="left">' . 
-htmlspecialchars($row['Docid']) . '</td><td align="left">' . 
-htmlspecialchars($row['PatientName']) . '</td><td align="left">' .
-htmlspecialchars($row['PatientContno']) . '</td><td align="left">' . 
-htmlspecialchars($row['PatientEmail']) . '</td><td align="left">' .
-htmlspecialchars($row['PatientGender']) . '</td><td align="left">' . 
-htmlspecialchars($row['PatientAdd']) . '</td><td align="left">' .
-htmlspecialchars($row['PatientAge']) . '</td><td align="left">' . 
-htmlspecialchars($row['PatientMedhis']) . '</td><td align="left">' .
-htmlspecialchars($row['CreationDate']) . '</td><td align="left">';
+$row['Docid'] . '</td><td align="left">' . 
+$row['PatientName'] . '</td><td align="left">' .
+$row['PatientContno'] . '</td><td align="left">' . 
+$row['PatientEmail'] . '</td><td align="left">' .
+$row['PatientGender'] . '</td><td align="left">' . 
+$row['PatientAdd'] . '</td><td align="left">' .
+$row['PatientAge'] . '</td><td align="left">' . 
+$row['PatientMedhis'] . '</td><td align="left">' .
+$row['CreationDate'] . '</td><td align="left">';
 
 echo '</tr>';
 }

@@ -1,12 +1,3 @@
-<?php
-
-session_start();
-//error_reporting(0);
-include('config.php');
-include('checklogin.php');
-check_login();
-
-?>
 <html>
 
 <head>
@@ -73,14 +64,14 @@ cellspacing="5" cellpadding="8">
 while($row = mysqli_fetch_array($response)){
 
     echo '<tr><td align="left">' . 
-    htmlspecialchars($row['doctorSpecialization']) . '</td><td align="left">' . 
-    htmlspecialchars($row['id']) . '</td><td align="left">' . 
-    htmlspecialchars($row['doctorId']) . '</td><td align="left">' . 
-    htmlspecialchars($row['pat_id']) . '</td><td align="left">' . 
-    htmlspecialchars($row['consultancyFees']) . '</td><td align="left">' . 
-    htmlspecialchars($row['appointmentDate']) . '</td><td align="left">' . 
-    htmlspecialchars($row['appointmentTime']). '</td><td align="left">' . 
-    htmlspecialchars($row['postingDate']) . '</td><td align="left">' ;
+    $row['doctorSpecialization'] . '</td><td align="left">' . 
+    $row['id'] . '</td><td align="left">' . 
+    $row['doctorId'] . '</td><td align="left">' . 
+    $row['pat_id'] . '</td><td align="left">' . 
+    $row['consultancyFees'] . '</td><td align="left">' . 
+    $row['appointmentDate'] . '</td><td align="left">' . 
+    $row['appointmentTime'] . '</td><td align="left">' . 
+    $row['postingDate'] . '</td><td align="left">' ;
     echo '</tr>' ; 
 
 
